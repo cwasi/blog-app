@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import validator from 'validator';
+import bcrypt from 'bcryptjs/dist/bcrypt.js';
 
 const userSchema = mongoose.Schema({
   name: {
@@ -30,7 +31,7 @@ const userSchema = mongoose.Schema({
     minLength: [8, 'Password should be more then 8 character'],
     select: false,
   },
-  passwordconfirm: {
+  passwordConfirm: {
     type: String,
     requird: [true, 'Please confirm your password'],
     validate: {
@@ -45,8 +46,27 @@ const userSchema = mongoose.Schema({
     default: true,
     select: false,
   },
+  passwordChangeAt: Date,
 });
 
-const User =mongoose.model('User',userSchema)
+// Middleware
+userSchema.pre('save', async function (next) {
+  // Only run function if password is modified
+  if (!this.isModified('password')) return next();
 
-export default User
+  // Hash password with cost of 12
+  this.password = await bcrypt.hash(this.password, 12);
+
+  // Delete the passwordComfirm field
+  this.passwordConfirm = undefined;
+  next();
+});
+
+userSchema.pre('save', async function (next) {
+  if (this.isModified('password') || this.isNew) return next();
+  this.passwordChangeAt = Date.now() - 1000;
+  next();
+});
+const User = mongoose.model('User', userSchema);
+
+export default User;
