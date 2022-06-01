@@ -8,6 +8,7 @@ process.on('uncaughtException', err => {
 });
 
 dotenv.config('./.env');
+// eslint-disable-next-line import/first
 import app from './app.js';
 
 const DB = process.env.DATABASE.replace(
@@ -21,7 +22,7 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => {
-    console.log('Database connetion suceessfull');
+    console.log('Database connetion successfull');
   });
 
 console.log(process.env.NODE_ENV);
