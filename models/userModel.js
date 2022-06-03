@@ -67,6 +67,20 @@ userSchema.pre('save', async function (next) {
   this.passwordChangeAt = Date.now() - 1000;
   next();
 });
+
+// Instance
+userSchema.pre(/^find/, function () {
+  // This point to the current query
+  this.find({ active: { $ne: false } });
+});
+
+userSchema.methods.correctPassword = async function (
+  candidatePassword,
+  userPassword
+) {
+  return await bcrypt.compare(candidatePassword, userPassword);
+};
+
 const User = mongoose.model('User', userSchema);
 
 export default User;
