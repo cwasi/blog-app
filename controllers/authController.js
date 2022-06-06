@@ -156,4 +156,79 @@ const resetPassword = catchAsync(async (req, res, next) => {
   createSendToken(user, 200, res);
 });
 
-export { signup, login, logout, isLoggedIn, forgotPassword, resetPassword };
+const protect = catchAsync(async (req, res, next) => {
+  let token;
+
+  if (
+    req.header.authorization &&
+    req.header.authorization.startsWith('Bearer')
+  ) {
+    token = req.header.authorization.split(' ')[1];
+  } else if (req.cookies.jwt) {
+    token = req.cookies.jwt;
+  }
+
+  if (!token) {
+    return next(
+      new AppError("You don't have pemission to preform this action.", 403)
+    );
+  }
+
+  // 2) verify token
+  const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+
+  // 3) check if user still exist
+  const currentUser = await User.findById(decoded.id);
+  if (!currentUser) {
+    return next(
+      new AppError('The user belongint to this token does not exist'),
+      401
+    );
+  }
+
+  // 4) check if user change password after the token was issued
+  if (currentUser.changePasswordAfter(decoded.id)) {
+    return new AppError('User recently changed password! log in again');
+  }
+
+  // GRANT ACCESS TO PROTECT ROUTE
+  req.user = currentUser;
+  //   req.locals.user = currentUser
+
+  next();
+});
+
+const updatePassword = catchAsync(async (req, res, next) => {
+  // 1) get user
+  const user = await User.findById(req.user.id).select('+password');
+
+  // 2) check if previous and currnet password correct
+  if (!(await user.correctPassword(req.body.passwordCurrent, user.password))) {
+    return next(
+      new AppError(
+        'Your current password does not match your pervious password'
+      ),
+      401
+    );
+  }
+
+  // 3) if true
+  user.password = req.body.password;
+  user.passwordConfirm = req.body.passwordConfirm;
+  await user.save();
+
+  // 4) log user in, send JWT
+  createSendToken(user, 200, res);
+
+});
+
+export {
+  signup,
+  login,
+  logout,
+  isLoggedIn,
+  protect,
+  forgotPassword,
+  resetPassword,
+  updatePassword,
+};
