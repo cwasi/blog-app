@@ -8,7 +8,15 @@ import {
   resetPassword,
   updatePassword,
 } from '../controllers/authController.js';
-import { createUser } from '../controllers/userController.js';
+import {
+  createUser,
+  getMe,
+  deleteMe,
+  getUser,
+  getAllUser,
+  updateUser,
+  deleteUser,
+} from '../controllers/userController.js';
 
 const router = express.Router();
 
@@ -20,7 +28,7 @@ router.patch('/resetPassword/:token', resetPassword);
 
 router.use(protect);
 router.patch('/updateMyPassword', updatePassword);
-
+router.get('/me', getMe, getUser);
 router.route('/register').post(createUser);
 
 export default router;
