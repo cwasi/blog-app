@@ -181,7 +181,7 @@ const protect = catchAsync(async (req, res, next) => {
   const currentUser = await User.findById(decoded.id);
   if (!currentUser) {
     return next(
-      new AppError('The user belongint to this token does not exist'),
+      new AppError('The user belonging to this token does not exist'),
       401
     );
   }

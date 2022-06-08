@@ -3,9 +3,9 @@ import AppError from '../utils/appError.js';
 
 // deleteOne, updateOne, createOne, getOne, getAll
 
-const getOne = (Modal, popOptions) =>
+const getOne = (Model, popOptions) =>
   catchAsync(async (req, res, next) => {
-    const query = Modal.findById(req.params.id);
+    const query = Model.findById(req.params.id);
     if (popOptions) query.populate(popOptions);
 
     const doc = await query;
