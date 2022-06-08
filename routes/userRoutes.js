@@ -13,9 +13,6 @@ import {
   getMe,
   deleteMe,
   getUser,
-  getAllUser,
-  updateUser,
-  deleteUser,
 } from '../controllers/userController.js';
 
 const router = express.Router();
@@ -29,6 +26,8 @@ router.patch('/resetPassword/:token', resetPassword);
 router.use(protect);
 router.patch('/updateMyPassword', updatePassword);
 router.get('/me', getMe, getUser);
+router.delete('/deleteMe', deleteMe);
+
 router.route('/register').post(createUser);
 
 export default router;

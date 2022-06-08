@@ -1,6 +1,6 @@
 import User from '../models/userModel.js';
 import catchAsync from '../utils/catchAsync.js';
-import { getOne } from './handlerFactory.js';
+import { getOne,deleteOne } from './handlerFactory.js';
 
 const createUser = catchAsync(async (req, res, next) => {
   const newUser = await User.create(req.body);
@@ -19,7 +19,7 @@ const getMe = (req, res, next) => {
 const deleteMe = catchAsync(async (req, res, next) => {
   await User.findByIdAndUpdate(req.user.id, { active: false });
 
-  res.status(204).jsob({
+  res.status(204).json({
     status: 'success',
     data: null,
   });
@@ -27,8 +27,8 @@ const deleteMe = catchAsync(async (req, res, next) => {
 
 const getUser = getOne(User);
 const getAllUser = () => {};
-const updateUser = () => {};
-const deleteUser = () => {};
+// Do NOT update password with this
+const deleteUser = deleteOne(User)
 
 export {
   createUser,
@@ -36,6 +36,5 @@ export {
   deleteMe,
   getUser,
   getAllUser,
-  updateUser,
   deleteUser,
 };
