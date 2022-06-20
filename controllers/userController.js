@@ -2,7 +2,7 @@ import multer from 'multer';
 import sharp from 'sharp';
 import User from '../models/userModel.js';
 import catchAsync from '../utils/catchAsync.js';
-import { getOne, deleteOne, updateOne } from './handlerFactory.js';
+import { getOne, deleteOne, updateOne, getAll } from './handlerFactory.js';
 import AppError from '../utils/appError.js';
 
 const muslterStorage = multer.memoryStorage();
@@ -88,8 +88,9 @@ const deleteMe = catchAsync(async (req, res, next) => {
   });
 });
 
+
 const getUser = getOne(User);
-const getAllUser = () => {};
+const getAllUsers=getAll(User)
 // Do NOT update password with this
 const updateUser = updateOne(User);
 const deleteUser = deleteOne(User);
@@ -99,7 +100,7 @@ export {
   getMe,
   deleteMe,
   getUser,
-  getAllUser,
+  getAllUsers,
   deleteUser,
   updateUser,
   updateMe,

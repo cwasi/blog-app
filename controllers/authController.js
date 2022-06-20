@@ -219,8 +219,18 @@ const updatePassword = catchAsync(async (req, res, next) => {
 
   // 4) log user in, send JWT
   createSendToken(user, 200, res);
-
 });
+
+const restrictTo = (...roles) => {
+  return (req, res, next) => {
+    if (!roles.includes(req.user.role)) {
+      return next(
+        new AppError('You do not have permission to perform this action')
+      );
+    }
+    next()
+  };
+};
 
 export {
   signup,
@@ -228,6 +238,7 @@ export {
   logout,
   isLoggedIn,
   protect,
+  restrictTo,
   forgotPassword,
   resetPassword,
   updatePassword,

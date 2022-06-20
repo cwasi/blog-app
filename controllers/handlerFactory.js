@@ -54,4 +54,17 @@ const updateOne = Model =>
     });
   });
 
-export { getOne, deleteOne, updateOne };
+const getAll = Model =>
+  catchAsync(async (req, res, next) => {
+    const doc = await Model.find()
+
+    res.status(200).json({
+      status: 'success',
+      result:doc.length,
+      data:{
+        doc
+      }
+    });
+  });
+
+export { getOne, deleteOne, updateOne, getAll };

@@ -1,5 +1,6 @@
 import express from 'express';
 import {
+  restrictTo,
   protect,
   signup,
   login,
@@ -16,6 +17,7 @@ import {
   updateMe,
   uploadUserPhoto,
   resizeUserPhoto,
+  getAllUsers,
 } from '../controllers/userController.js';
 
 const router = express.Router();
@@ -33,6 +35,9 @@ router.get('/me', getMe, getUser);
 router.patch('/updateMe', uploadUserPhoto, resizeUserPhoto, updateMe);
 router.delete('/deleteMe', deleteMe);
 
+// Restriced ONLY to ADMIN's
+router.use(restrictTo('admin'));
+router.route('/getAllUsers').get(getAllUsers);
 router.route('/register').post(createUser);
 
 export default router;
