@@ -8,6 +8,7 @@ import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
 
 import userRouter from './routes/userRoutes.js';
+import blogRouter from './routes/blogRoutes.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -38,5 +39,6 @@ app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 app.use(cookieParser());
 
 app.use('/api/v1/users', userRouter);
+app.use('/api/v1/blogs', blogRouter);
 
 export default app;
