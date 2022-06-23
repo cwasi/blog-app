@@ -7,6 +7,6 @@ const router = express.Router();
 router
   .route('/')
   .get(getAllBlogs)
-  .post(protect, restrictTo('admin'), createBlog);
+  .post(protect, restrictTo('admin','user'), createBlog);
 
 export default router;
