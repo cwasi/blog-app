@@ -1,11 +1,18 @@
 import express from 'express';
-import { restrictTo } from '../controllers/authController';
-import { getAll } from '../controllers/handlerFactory';
+import { restrictTo, protect } from '../controllers/authController.js';
+import {
+  setCommentAndUserIds,
+  createComment,
+  getAllComments,
+} from '../controllers/commentController.js';
 
-const router = express.Router([mergeParams:true])
+const router = express.Router({ mergeParams: true });
 
-router.use(protect)
+router.use(protect);
 
-router('/')get(getAllComments).post(restrictTo('user',) SetCommentAndUserIds, createCommnet)
+router
+  .route('/')
+  .get(getAllComments)
+  .post(restrictTo('user'), setCommentAndUserIds, createComment);
 
 export default router;

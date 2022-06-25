@@ -5,15 +5,16 @@ const commentSchema = mongoose.Schema(
   {
     comment: {
       type: String,
+      trim: true,
       require: [true, 'Comment cannot be empty'],
     },
-    rating: {
+    ratings: {
       type: Number,
       min: 1,
       max: 5,
     },
     commentCreatedAt: {
-      tyep: Date,
+      type: Date,
       default: Date.now,
     },
     blog: {

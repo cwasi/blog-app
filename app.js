@@ -9,6 +9,7 @@ import cookieParser from 'cookie-parser';
 
 import userRouter from './routes/userRoutes.js';
 import blogRouter from './routes/blogRoutes.js';
+import commentRouter from './routes/commentRoutes.js' 
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -40,5 +41,6 @@ app.use(cookieParser());
 
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/blogs', blogRouter);
+app.use('/api/v1/comment', commentRouter)
 
 export default app;
