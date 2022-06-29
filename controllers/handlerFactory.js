@@ -1,7 +1,18 @@
+import APIFeatures from '../utils/apiFeatures.js';
 import catchAsync from '../utils/catchAsync.js';
 import AppError from '../utils/appError.js';
 
-// deleteOne, updateOne, createOne, getOne, getAll
+const createOne = Model =>
+  catchAsync(async (req, res, next) => {
+    const doc = await Model.create(req.body);
+
+    res.status(201).json({
+      status: 'success',
+      data: {
+        data: doc,
+      },
+    });
+  });
 
 const getOne = (Model, popOptions) =>
   catchAsync(async (req, res, next) => {
@@ -49,22 +60,33 @@ const updateOne = Model =>
     res.status(200).json({
       status: 'success',
       data: {
-        doc,
+        data: doc,
       },
     });
   });
 
 const getAll = Model =>
   catchAsync(async (req, res, next) => {
-    const doc = await Model.find()
+    // To allow for nested GET comments on blog (hack)
+    let filter;
+    if (req.params.tourId) filter = { tour: req.params.tourId };
+
+    // EXECUTE QUERY
+    const features = new APIFeatures(Model.find(filter), req.query)
+      .filter()
+      .sort()
+      .limitField()
+      .pagination();
+    const doc = await features.query;
 
     res.status(200).json({
       status: 'success',
-      result:doc.length,
-      data:{
-        doc
-      }
+      requestedAt: new Date().toISOString(),
+      result: doc.length,
+      data: {
+        data: doc,
+      },
     });
   });
 
-export { getOne, deleteOne, updateOne, getAll };
+export { deleteOne, updateOne, createOne, getOne, getAll };

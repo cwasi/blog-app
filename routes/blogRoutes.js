@@ -5,6 +5,8 @@ import {
   uploadBlogImage,
   resizeBlogImage,
   UpdateBlog,
+  getBlog,
+  deleteBlog,
 } from '../controllers/blogController.js';
 import { protect, restrictTo } from '../controllers/authController.js';
 
@@ -15,6 +17,16 @@ router
   .get(getAllBlogs)
   .post(protect, restrictTo('admin', 'user'), createBlog);
 
-router.route('/:id').patch(uploadBlogImage, resizeBlogImage, UpdateBlog);
+router
+  .route('/:id')
+  .get(getBlog)
+  .patch(
+    protect,
+    restrictTo('admin', 'user'),
+    uploadBlogImage,
+    resizeBlogImage,
+    UpdateBlog
+  )
+  .delete(protect, restrictTo('admin', 'user'),deleteBlog);
 
 export default router;

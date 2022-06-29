@@ -1,5 +1,12 @@
 import multer from 'multer';
 import sharp from 'sharp';
+import {
+  deleteOne,
+  updateOne,
+  createOne,
+  getOne,
+  getAll,
+} from './handlerFactory.js';
 import catchAsync from '../utils/catchAsync.js';
 import Blog from '../models/blogModel.js';
 import AppError from '../utils/appError.js';
@@ -35,44 +42,11 @@ const resizeBlogImage = catchAsync(async (req, res, next) => {
   next();
 });
 
-const UpdateBlog = catchAsync(async (req, res, next) => {
-  const doc = await Blog.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-    runValidators: true,
-    useFindAndModify: false,
-  });
-
-  if (!doc) {
-    return next(new AppError('NO document found with that Id', 404));
-  }
-
-  res.status(200).json({
-    status: 'success',
-    data: { doc },
-  });
-});
-
-const getAllBlogs = catchAsync(async (req, res, next) => {
-  const doc = await Blog.find();
-
-  res.status(200).json({
-    status: 'success',
-    data: {
-      doc,
-    },
-  });
-});
-
-const createBlog = catchAsync(async (req, res, next) => {
-  const doc = await Blog.create(req.body);
-
-  res.status(201).json({
-    status: 'success',
-    data: {
-      data: doc,
-    },
-  });
-});
+const createBlog = createOne(Blog);
+const getAllBlogs = getAll(Blog);
+const UpdateBlog = updateOne(Blog);
+const deleteBlog = deleteOne(Blog);
+const getBlog = getOne(Blog);
 
 export {
   uploadBlogImage,
@@ -80,4 +54,6 @@ export {
   getAllBlogs,
   createBlog,
   UpdateBlog,
+  getBlog,
+  deleteBlog,
 };
