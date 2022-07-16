@@ -1,0 +1,199 @@
+@import url("https://fonts.googleapis.com/css2?family=Sen:wght@400;700;800&display=swap");
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit; }
+
+html {
+  font-size: 62.5%; }
+
+body {
+  font-family: 'Sen', sans-serif;
+  font-size: 1.6rem;
+  color: #999;
+  background-color: #f7f7f7; }
+
+.main {
+  flex: 1;
+  position: relative; }
+
+.card {
+  padding: 1rem;
+  width: 35rem;
+  height: 50rem;
+  border-radius: 0.5rem;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column; }
+  .card__img--container {
+    margin-bottom: 2rem;
+    background-color: #1fe5d9;
+    width: 100%;
+    height: 22rem;
+    border-radius: 0.5rem; }
+  .card__author--info {
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center; }
+  .card__author__img {
+    margin-right: 2rem;
+    background-color: #1fe5d9;
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%; }
+  .card__author__name {
+    font-size: 1.6rem;
+    font-weight: 700; }
+  .card__title {
+    margin-bottom: 1.5rem;
+    font-size: 1.7rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #777; }
+  .card__description {
+    margin-bottom: 2rem;
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 1.9rem; }
+  .card__category-date {
+    display: flex;
+    justify-content: end; }
+  .card__category {
+    margin-right: 1rem;
+    font-size: 1.3rem;
+    font-weight: 700; }
+  .card__date {
+    font-size: 1.3rem; }
+
+.btn, .btn:link, .btn:visited {
+  font-family: inherit;
+  text-transform: uppercase;
+  padding: 1rem 3rem;
+  display: inline-block;
+  border-radius: 10rem;
+  transition: all 0.2s;
+  font-size: 1.6rem;
+  border: none;
+  cursor: pointer; }
+
+.btn:hover {
+  box-shadow: 0 1rem 3rem rgba(153, 153, 153, 0.2); }
+
+.btn--aqua {
+  background-color: #1fe5d9;
+  color: #777;
+  align-self: center; }
+
+.login-form {
+  margin: 6rem auto;
+  width: 35rem;
+  height: 45rem;
+  border-radius: 0.3rem;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+  .login-form__title {
+    margin: 2rem 0;
+    padding: 1.5rem 4rem;
+    font-size: 2rem; }
+
+.form-group:not(:last-child) {
+  margin-bottom: 2rem; }
+
+.form-group {
+  width: 30rem;
+  display: flex;
+  flex-direction: column; }
+
+.form__input {
+  font-size: 1.5rem;
+  font-family: inherit;
+  color: inherit;
+  padding: 1.5rem 2rem;
+  border-radius: 2px;
+  background-color: #f2f2f2;
+  border: none;
+  border-bottom: 3px solid transparent;
+  width: 85%;
+  display: block;
+  transition: all 0.3s; }
+  .form__input:focus {
+    outline: none;
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+    border-bottom: 3px solid #7ed56f; }
+  .form__input:focus:invalid {
+    border-bottom: 3px solid #ff7730; }
+  .form__input::-webkit-input-placeholder {
+    color: #999; }
+
+.form__label {
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-left: 2rem;
+  margin-top: 0.7rem;
+  display: block;
+  transition: all 0.3s; }
+
+.form__input:placeholder-shown + .form__label {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-3rem); }
+
+.blog__pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+  .blog__pagination__number-box {
+    margin: 0 2rem;
+    width: 12rem;
+    height: 4rem;
+    border-radius: 100px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly; }
+  .blog__pagination__number {
+    width: 2rem;
+    height: 2rem;
+    text-align: center;
+    padding: 0.5rem;
+    border-radius: 100px;
+    border: 0.1rem solid transparent; }
+    .blog__pagination__number:hover {
+      border: 0.1rem solid #1fe5d9; }
+  .blog__pagination__number--active {
+    background-color: #1fe5d9; }
+  .blog__pagination--left-arrow, .blog__pagination--right-arrow {
+    padding: 0.9rem;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 100px;
+    border: 0.1rem solid #1fe5d9;
+    background-color: white; }
+    .blog__pagination--left-arrow:hover, .blog__pagination--right-arrow:hover {
+      background-color: #1fe5d9; }
+
+.blog {
+  margin-bottom: 15rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+  .blog__post {
+    margin-bottom: 10rem;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 2.5rem;
+    justify-content: center; }
+
+.footer {
+  background-color: #eeeeee;
+  color: rgba(32, 32, 32, 0.445);
+  padding: 4rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+  .footer__logo, .footer__text {
+    padding-bottom: 1rem; }

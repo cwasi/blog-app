@@ -7,6 +7,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
 
+import viewRouter from './routes/viewRoutes.js'
 import userRouter from './routes/userRoutes.js';
 import blogRouter from './routes/blogRoutes.js';
 import commentRouter from './routes/commentRoutes.js' 
@@ -39,8 +40,10 @@ app.use(express.json({ limit: '10kb' }));
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 app.use(cookieParser());
 
+app.use('/',viewRouter)
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/blogs', blogRouter);
 app.use('/api/v1/comment', commentRouter)
 
 export default app;
+

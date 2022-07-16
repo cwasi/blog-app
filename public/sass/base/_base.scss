@@ -1,0 +1,26 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Sen:wght@400;700;800&display=swap');
+
+html {
+  // 10px / 16px = 62.5%
+  font-size: 62.5%;
+}
+
+body {
+  font-family: 'Sen', sans-serif;
+  font-size: 1.6rem;
+  color: $color-gray-dark-3;
+  background-color: #f7f7f7;
+}
+
+.main {
+  flex: 1;
+  position: relative;
+}

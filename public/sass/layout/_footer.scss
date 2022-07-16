@@ -1,0 +1,14 @@
+.footer {
+  background-color: rgb(238, 238, 238);
+
+  color: rgba(32, 32, 32, 0.445);
+  padding: 4rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  // justify-content: center;
+  &__logo,
+  &__text {
+    padding-bottom: 1rem;
+  }
+}

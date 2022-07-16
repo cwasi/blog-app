@@ -1,0 +1,27 @@
+.btn {
+  &,
+  &:link,
+  &:visited {
+    font-family: inherit;
+    text-transform: uppercase;
+    padding: 1rem 3rem;
+    display: inline-block;
+    border-radius: 10rem;
+    transition: all 0.2s;
+    font-size: 1.6rem;
+
+    // Change for the <button> element
+    border: none;
+    cursor: pointer;
+  }
+
+  &:hover {
+    box-shadow: 0 1rem 3rem rgba(#999, 0.2);
+  }
+
+  &--aqua {
+    background-color: $color-tertiary;
+    color: #777;
+    align-self: center;
+  }
+}

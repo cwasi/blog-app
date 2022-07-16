@@ -1,0 +1,15 @@
+extends base
+
+block content
+  main
+    .login-form
+      .login-form__title Login
+      form.form(action='')
+        .form-group
+          input#email.form__input(type='email' name='email' placeholder='Email' required='')
+          label.form__label(for='email') Email
+        .form-group
+          input#password.form__input(type='password' name='email' placeholder='Password' minlength='8' required='')
+          label.form__label(for='password') Password
+        .form-group
+          button.btn.btn--aqua Login

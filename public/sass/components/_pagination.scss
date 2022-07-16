@@ -1,0 +1,47 @@
+.blog__pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__number-box {
+    margin: 0 2rem;
+    width: 12rem;
+    height: 4rem;
+    border-radius: 100px;
+    background-color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
+  &__number {
+    width: 2rem;
+    height: 2rem;
+    text-align: center;
+    padding: 0.5rem;
+    border-radius: 100px;
+    border: 0.1rem solid transparent;
+
+    &:hover {
+      border: 0.1rem solid $color-tertiary;
+    }
+  }
+
+  &__number--active {
+    background-color: $color-tertiary;
+  }
+
+  &--left-arrow,
+  &--right-arrow {
+    padding: 0.9rem;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 100px;
+    border: 0.1rem solid $color-tertiary;
+    background-color: white;
+    &:hover {
+      background-color: $color-tertiary;
+    }
+  }
+}
